@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="65dp"
+        tools:context=".mvp.view.fragment.NextFragment">
+
+    <Spinner
+            android:id="@+id/spinner_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    </Spinner>
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/next_match"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/spinner_next"/>
+
+    <ProgressBar
+            android:id="@+id/loading_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+
+</RelativeLayout>
