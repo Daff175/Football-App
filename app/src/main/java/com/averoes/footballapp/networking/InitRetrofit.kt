@@ -2,7 +2,6 @@ package com.averoes.footballapp.networking
 
 import com.averoes.footballapp.BuildConfig
 import com.google.gson.GsonBuilder
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -26,7 +25,6 @@ class InitRetrofit  {
         .baseUrl(BuildConfig.BASE_URL)
         .client(client)
         .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
 
     fun getInstance() : RestApi = retrofit.create(RestApi::class.java)

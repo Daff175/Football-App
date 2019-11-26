@@ -4,6 +4,7 @@ import com.averoes.footballapp.mvp.model.event.ResponseSearch
 import com.example.footballapp.mvp.model.Event.ResponseEvent
 import com.example.footballapp.mvp.model.club.ResponseClub
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -13,18 +14,18 @@ interface RestApi {
     fun getAllClub(@Query("l")league : String):Call<ResponseClub>
 
     @GET("lookupteam.php")
-    suspend fun getTeamDetail(@Query("id") teamId:String): Call<ResponseClub>
+    suspend fun getTeamDetail(@Query("id") teamId:String): Response<ResponseClub>
 
     @GET("eventspastleague.php")
-    fun getLastMatch(@Query("id")id : String) : Call<ResponseEvent>
+    suspend fun getLastMatch(@Query("id")id : String) : Response<ResponseEvent>
 
     @GET("eventsnextleague.php")
-    fun getNextMatch(@Query("id")id : String) : Call<ResponseEvent>
+    suspend fun getNextMatch(@Query("id")id : String) : Response<ResponseEvent>
 
     @GET("lookupevent.php")
-    fun getMatchDetail(@Query("id")id : String) : Call<ResponseEvent>
+    suspend fun getMatchDetail(@Query("id")id : String) : Response<ResponseEvent>
 
     @GET("searchevents.php")
-    fun searchEvent(@Query("e")event:String):Call<ResponseSearch>
+    suspend fun searchEvent(@Query("e")event:String):Response<ResponseSearch>
 
 }

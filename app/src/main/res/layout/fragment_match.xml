@@ -15,7 +15,7 @@
             app:tabTextColor="@android:color/white"
             app:tabSelectedTextColor="@android:color/holo_orange_dark"
             android:background="@color/colorAccent"
-    android:layout_below="@id/spinner">
+            android:layout_below="@id/spinner">
 
         <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"

@@ -1,86 +1,77 @@
 package com.averoes.footballapp.mvp.presenter
 
-import android.util.Log
-import com.averoes.footballapp.mvp.model.event.ResponseSearch
 import com.averoes.footballapp.mvp.view.MatchView
 import com.averoes.footballapp.networking.InitRetrofit
-import com.example.footballapp.mvp.model.Event.ResponseEvent
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MatchPresenter(private val view: MatchView) {
 
     fun getNextMatch(leagueId:Int){
         view.showLoading()
-        val api = InitRetrofit().getInstance()
-        api.getNextMatch(leagueId.toString()).enqueue(object : Callback<ResponseEvent> {
-            override fun onFailure(call: Call<ResponseEvent>, t: Throwable) {
-                view.hideLoading()
-                view.errorMessage("Network Failure")
-                Log.d("RESPONSE", "ERROR")
-                t.printStackTrace()
+
+        GlobalScope.launch (Dispatchers.IO){
+            try {
+                val api = InitRetrofit().getInstance()
+                val response = api.getNextMatch(leagueId.toString())
+                if (response.isSuccessful){
+                    withContext(Dispatchers.Main){
+                        view.hideLoading()
+                        view.showMatchList(response.body()?.events)
+                    }
+                }
+            }catch (e:Exception){
+                e.printStackTrace()
+            }catch (e:Throwable){
+                e.printStackTrace()
             }
+        }
 
-            override fun onResponse(call: Call<ResponseEvent>, response: Response<ResponseEvent>) {
-
-                view.hideLoading()
-                val teamList = response.body()?.events
-                view.showMatchList(teamList)
-                view.showMessage("Succes")
-                Log.d("RESPONSE","SUCCES" )
-
-            }
-
-        })
     }
 
     fun getLastMatch(leagueId:Int){
         view.showLoading()
-        val api = InitRetrofit().getInstance()
-        api.getLastMatch(leagueId.toString()).enqueue(object : Callback<ResponseEvent> {
-            override fun onFailure(call: Call<ResponseEvent>, t: Throwable) {
-                view.hideLoading()
-                view.errorMessage("Network Failure")
-                Log.d("RESPONSE", "ERROR")
-                t.printStackTrace()
+
+        GlobalScope.launch (Dispatchers.IO){
+            try {
+                val api = InitRetrofit().getInstance()
+                val response = api.getLastMatch(leagueId.toString())
+                if (response.isSuccessful){
+                    withContext(Dispatchers.Main){
+                        view.hideLoading()
+                        view.showMatchList(response.body()?.events)
+                    }
+                }
+            }catch (e:Exception){
+                e.printStackTrace()
+            }catch (e:Throwable){
+                e.printStackTrace()
             }
+        }
 
-            override fun onResponse(call: Call<ResponseEvent>, response: Response<ResponseEvent>) {
-
-                view.hideLoading()
-                val teamList = response.body()?.events
-                view.showMatchList(teamList)
-                view.showMessage("Succes")
-                Log.d("RESPONSE","SUCCES" )
-
-            }
-
-        })
     }
 
     fun searchMatch(event:String){
         view.showLoading()
-        InitRetrofit().getInstance().searchEvent(event)
-            .enqueue(object : Callback<ResponseSearch>{
-                override fun onFailure(call: Call<ResponseSearch>, t: Throwable) {
-                    view.errorMessage("error")
-                    t.printStackTrace()
-                    Log.e("RESPONSE", "ERROR")
 
+        GlobalScope.launch (Dispatchers.IO){
+            try {
+                val api = InitRetrofit().getInstance()
+                val response = api.searchEvent(event)
+                if (response.isSuccessful){
+                    withContext(Dispatchers.Main){
+                        view.hideLoading()
+                        view.showMatchList(response.body()?.event)
+                    }
                 }
-
-                override fun onResponse(call: Call<ResponseSearch>, response: Response<ResponseSearch>) {
-
-                    view.hideLoading()
-                    val event = response.body()?.event?.filter { it.strSport == "Soccer" }
-                    view.showMatchList(event)
-                    view.showMessage("Success")
-                    Log.d("RESPONSE","SUCCES" )
-
-                }
-
-            })
+            }catch (e:Exception){
+                e.printStackTrace()
+            }catch (e:Throwable){
+                e.printStackTrace()
+            }
+        }
     }
 
 }

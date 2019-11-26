@@ -57,12 +57,13 @@ class SearchFragment : Fragment(), MatchView {
         sear_match.queryHint = "Search Match..."
         sear_match.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                presenter.searchMatch(sear_match.query.toString())
 
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                presenter.searchMatch(sear_match.query.toString())
+
                 return false
             }
 

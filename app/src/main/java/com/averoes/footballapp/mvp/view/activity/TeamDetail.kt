@@ -12,14 +12,10 @@ import com.averoes.footballapp.mvp.model.Favorite
 import com.averoes.footballapp.mvp.model.club.TeamsItem
 import com.averoes.footballapp.mvp.model.db.database
 import com.averoes.footballapp.mvp.model.event.EventsItem
-import com.averoes.footballapp.mvp.presenter.TeamDetailPresnter
+import com.averoes.footballapp.mvp.presenter.TeamDetailPresenter
 import com.averoes.footballapp.mvp.view.TeamDetailView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_team_detail.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
@@ -27,12 +23,11 @@ import org.jetbrains.anko.db.select
 import org.jetbrains.anko.toast
 
 class TeamDetail : AppCompatActivity(), TeamDetailView {
-    private lateinit var presenter: TeamDetailPresnter
-    private lateinit var teams :TeamsItem
-    private lateinit var event : EventsItem
+    private lateinit var presenter: TeamDetailPresenter
+    private lateinit var teams: TeamsItem
+    private lateinit var event: EventsItem
 
     private var menuItem: Menu? = null
-
 
 
     private var isFavorite: Boolean = false
@@ -44,14 +39,12 @@ class TeamDetail : AppCompatActivity(), TeamDetailView {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val detail = intent.getParcelableExtra<EventsItem>("detail")
-        presenter = TeamDetailPresnter(this)
+        presenter = TeamDetailPresenter(this)
 
         presenter.getEventDetail(detail.idEvent.toString())
         presenter.getTeamDetail(detail.idHomeTeam.toString())
         presenter.getTeamDetail(detail.idAwayTeam.toString(), false)
         favoteState(detail.idEvent.toString())
-
-
 
 
     }
@@ -67,12 +60,12 @@ class TeamDetail : AppCompatActivity(), TeamDetailView {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val detail = intent.getParcelableExtra<EventsItem>("detail")
 
-        return when(item?.itemId){
+        return when (item?.itemId) {
             android.R.id.home -> {
                 finish()
                 true
             }
-            R.id.add_to_favorite ->{
+            R.id.add_to_favorite -> {
                 if (isFavorite) removeFromFavorite(detail.idEvent.toString()) else addToFavorite()
                 isFavorite = !isFavorite
                 setFavorite()
@@ -85,7 +78,7 @@ class TeamDetail : AppCompatActivity(), TeamDetailView {
     //add to database
 
 
-    private fun addToFavorite(){
+    private fun addToFavorite() {
 
         if (!TextUtils.isEmpty(name_awayDetail.text)) {
 
@@ -115,14 +108,14 @@ class TeamDetail : AppCompatActivity(), TeamDetailView {
             } catch (e: SQLiteConstraintException) {
                 toast(e.localizedMessage)
             }
-        }else{
+        } else {
             toast("Please try again")
             isFavorite = false
             setFavorite()
         }
     }
 
-    private fun removeFromFavorite(id : String){
+    private fun removeFromFavorite(id: String) {
         try {
             database.use {
 
@@ -130,18 +123,18 @@ class TeamDetail : AppCompatActivity(), TeamDetailView {
             }
 
             toast("Removed From Favorite")
-        } catch (e: SQLiteConstraintException){
+        } catch (e: SQLiteConstraintException) {
             toast(e.localizedMessage)
         }
     }
 
-    private fun setFavorite(){
-        if (isFavorite){
+    private fun setFavorite() {
+        if (isFavorite) {
             menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_added_fav)
             val bundle = Bundle()
             isFavorite = false
             bundle.putBoolean("state", isFavorite)
-        }else{
+        } else {
             menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_add_fav)
             isFavorite = true
             val bundle = Bundle()
@@ -150,7 +143,7 @@ class TeamDetail : AppCompatActivity(), TeamDetailView {
 
     }
 
-    private fun favoteState(id : String){
+    private fun favoteState(id: String) {
         database.use {
             val result = select(Favorite.TABLE_FAVORITE).whereArgs("(EVENT_ID = {id})", "id" to id)
             val favorite = result.parseList(classParser<Favorite>())
@@ -160,24 +153,23 @@ class TeamDetail : AppCompatActivity(), TeamDetailView {
 
     override fun showLoading() {
     }
+
     override fun hideLoading() {
     }
 
     override fun showTeamDetail(data: List<TeamsItem>?, isHome: Boolean) {
-        teams = TeamsItem(data!![0].idTeam,
+        teams = TeamsItem(
+            data!![0].idTeam,
             data[0].teamName,
             data[0].clubBadge,
             data[0].teamFormedYear,
             data[0].teamStadium,
-            data[0].teamDescription)
+            data[0].teamDescription
+        )
 
-        CoroutineScope(Dispatchers.Main).launch {
-            withContext(Dispatchers.Main){
-                Glide.with(applicationContext).load(data[0].clubBadge).into(if (isHome) img_home_detail else img_away_detail)
 
-            }
+        Glide.with(applicationContext).load(data[0].clubBadge).into(if (isHome) img_home_detail else img_away_detail)
 
-        }
 
     }
 
@@ -206,8 +198,10 @@ class TeamDetail : AppCompatActivity(), TeamDetailView {
         goal_home.text = event.strHomeGoalDetails
         goal_away.text = event.strAwayGoalDetails
 
-        if (event.strHomeYellowCards != null)yellow_cardHome.text = event.strHomeYellowCards else yellow_cardHome.text = "-"
-        if (event.strAwayGoalDetails != null)yellow_cardAway.text = event.strAwayYellowCards else yellow_cardAway.text = "-"
+        if (event.strHomeYellowCards != null) yellow_cardHome.text =
+            event.strHomeYellowCards else yellow_cardHome.text = "-"
+        if (event.strAwayGoalDetails != null) yellow_cardAway.text =
+            event.strAwayYellowCards else yellow_cardAway.text = "-"
 
     }
 
