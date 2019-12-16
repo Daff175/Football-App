@@ -80,7 +80,7 @@ class TeamDetail : AppCompatActivity(), MatchDetailView {
     override fun showDetailLeague(data: List<LeaguesItem>?) {
     }
 
-    fun addToFavorite(){
+    private fun addToFavorite(){
 
         if (!TextUtils.isEmpty(club_name_detail.text)){
 

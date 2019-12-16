@@ -17,7 +17,7 @@ import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.newTask
 
 class LeagueAdapter(private val context: Context, private val item: List<CountrysItem>) :
-    androidx.recyclerview.widget.RecyclerView.Adapter<LeagueAdapter.Holder>() {
+    RecyclerView.Adapter<LeagueAdapter.Holder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): Holder =
@@ -31,7 +31,7 @@ class LeagueAdapter(private val context: Context, private val item: List<Country
     }
 
 
-    class Holder(override val containerView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(containerView),
+    class Holder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
         LayoutContainer {
 
         private val name: TextView = containerView.find(R.id.league_name)

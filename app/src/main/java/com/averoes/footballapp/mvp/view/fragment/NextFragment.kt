@@ -46,7 +46,7 @@ class NextFragment : androidx.fragment.app.Fragment(), MatchView {
         presenter = MatchPresenter(this)
         adapter = MatchAdapter(activity!!.applicationContext, data)
         next_match.adapter = adapter
-        next_match.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(ctx)
+        next_match.layoutManager = LinearLayoutManager(ctx)
 
 
         val data = activity?.intent?.getParcelableExtra<CountrysItem>("detail")

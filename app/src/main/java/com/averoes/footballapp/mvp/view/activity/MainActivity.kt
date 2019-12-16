@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.averoes.footballapp.R
 import com.averoes.footballapp.mvp.view.fragment.HomeFavoriteFragment
+import com.averoes.footballapp.mvp.view.fragment.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
             when(menuItem.itemId){
                 R.id.teams -> {
-                    loadMatchFragment(savedInstanceState)
+                    loadLeagueFragment(savedInstanceState)
                 }
                 R.id.favorites -> {
                     loadFavoriteFragment(savedInstanceState)
@@ -30,17 +31,18 @@ class MainActivity : AppCompatActivity() {
         bottom_navigation.selectedItemId = R.id.teams
     }
 
-    fun loadMatchFragment(savedInstanceState: Bundle?){
+    private fun loadLeagueFragment(savedInstanceState: Bundle?){
         if (savedInstanceState == null){
             supportFragmentManager
                 .beginTransaction().replace(
                     R.id.main_container,
-                    HomeFragment())
+                    HomeFragment()
+                )
                 .commit()
         }
     }
 
-    fun loadFavoriteFragment(savedInstanceState: Bundle?){
+    private fun loadFavoriteFragment(savedInstanceState: Bundle?){
         if (savedInstanceState == null){
             supportFragmentManager
                 .beginTransaction().replace(

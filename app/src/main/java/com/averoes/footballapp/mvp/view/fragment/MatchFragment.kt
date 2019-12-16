@@ -6,7 +6,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +23,7 @@ import org.jetbrains.anko.support.v4.intentFor
  *
  */
 class MatchFragment : androidx.fragment.app.Fragment() {
-    private lateinit var viewPager: androidx.viewpager.widget.ViewPager
+    private lateinit var viewPager: ViewPager
     private lateinit var tabs: TabLayout
     private lateinit var btnSearch: FloatingActionButton
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -55,10 +54,10 @@ class MatchFragment : androidx.fragment.app.Fragment() {
 
 }
 
-private class TabAdapter(supportFragmentManager: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentStatePagerAdapter(supportFragmentManager) {
+private class TabAdapter(supportFragmentManager:FragmentManager) : androidx.fragment.app.FragmentStatePagerAdapter(supportFragmentManager) {
 
 
-    override fun getItem(position: Int): androidx.fragment.app.Fragment =
+    override fun getItem(position: Int):Fragment =
         when (position) {
             0 -> LastFragment()
 

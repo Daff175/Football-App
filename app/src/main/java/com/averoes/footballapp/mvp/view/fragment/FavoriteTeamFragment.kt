@@ -30,8 +30,8 @@ class FavoriteTeamFragment : androidx.fragment.app.Fragment(), AnkoComponent<Con
 
     private var favorites: MutableList<FavoriteTeam> = mutableListOf()
     private lateinit var adapter: FavoriteTeamAdapter
-    private lateinit var listTeam: androidx.recyclerview.widget.RecyclerView
-    private lateinit var swipeRefresh: androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    private lateinit var listTeam: RecyclerView
+    private lateinit var swipeRefresh: SwipeRefreshLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,7 +57,7 @@ class FavoriteTeamFragment : androidx.fragment.app.Fragment(), AnkoComponent<Con
                 )
                 listTeam = recyclerView {
                     lparams(width = matchParent, height = wrapContent)
-                    layoutManager = androidx.recyclerview.widget.LinearLayoutManager(ctx)
+                    layoutManager = LinearLayoutManager(ctx)
                 }
             }
         }

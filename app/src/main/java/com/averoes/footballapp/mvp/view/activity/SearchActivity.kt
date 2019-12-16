@@ -31,7 +31,7 @@ class SearchActivity : AppCompatActivity(), MatchView {
         presenter = MatchPresenter(this)
         adapter = MatchAdapter(baseContext, event)
 
-        result_search.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(ctx)
+        result_search.layoutManager = LinearLayoutManager(ctx)
         result_search.adapter = adapter
         adapter.notifyDataSetChanged()
 

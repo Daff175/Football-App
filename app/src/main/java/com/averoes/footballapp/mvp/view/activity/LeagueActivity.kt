@@ -44,11 +44,11 @@ class LeagueActivity : AppCompatActivity() {
 
     }
 
-    private class TabAdapter(supportFragmentManager: androidx.fragment.app.FragmentManager) :
+    private class TabAdapter(supportFragmentManager: FragmentManager) :
         androidx.fragment.app.FragmentStatePagerAdapter(supportFragmentManager) {
 
 
-        override fun getItem(position: Int): androidx.fragment.app.Fragment =
+        override fun getItem(position: Int): Fragment =
             when (position) {
                 0 -> MatchFragment()
 
@@ -65,7 +65,7 @@ class LeagueActivity : AppCompatActivity() {
 
                 1 -> "Teams"
 
-                else -> "Klasemen"
+                else -> "Standings"
             }
         }
 

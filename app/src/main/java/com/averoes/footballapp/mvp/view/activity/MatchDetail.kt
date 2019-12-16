@@ -65,7 +65,7 @@ class MatchDetail : AppCompatActivity(), MatchDetailView {
                 true
             }
             R.id.add_to_favorite -> {
-                favoteState(event.idEvent.toString())
+                favoriteState(event.idEvent.toString())
                 if (isFavorite) removeFromFavorite(detail.idEvent.toString()) else addToFavorite()
                 isFavorite = !isFavorite
                 setFavorite()
@@ -144,12 +144,12 @@ class MatchDetail : AppCompatActivity(), MatchDetailView {
 
     }
 
-    private fun favoteState(id: String) {
+    private fun favoriteState(id: String) {
         database.use {
             val result = select(Favorite.TABLE_FAVORITE).whereArgs("(EVENT_ID = {id})", "id" to id)
 
             val favorite = result.parseList(classParser<Favorite>())
-            if (!favorite.isEmpty()) isFavorite = true
+            if (favorite.isNotEmpty()) isFavorite = true
         }
     }
 

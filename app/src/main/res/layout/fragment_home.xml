@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".mvp.view.activity.HomeFragment">
+                android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+                tools:context=".mvp.view.fragment.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -11,12 +11,13 @@
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/league_list"
                 android:layout_width="match_parent"
-                android:layout_marginStart="40dp"
-                android:layout_gravity=""
                 android:layout_height="match_parent"/>
 
-    <ProgressBar
+    <com.github.ybq.android.spinkit.SpinKitView
             android:id="@+id/loading_league"
+            style="@style/SpinKitView.FoldingCube"
+            app:SpinKit_Color="@color/colorAccent"
+            app:SpinKit_Style="FoldingCube"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"/>

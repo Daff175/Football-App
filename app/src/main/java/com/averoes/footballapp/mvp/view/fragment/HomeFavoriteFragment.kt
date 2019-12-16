@@ -24,7 +24,12 @@ class HomeFavoriteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_home_favorite, container, false)
+        return inflater.inflate(R.layout.fragment_home_favorite, container, false)
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         view.tablayout.setupWithViewPager(view_pager)
 
@@ -36,9 +41,7 @@ class HomeFavoriteFragment : Fragment() {
 
         view.view_pager.adapter = adapter
 
-        return view
     }
-
 
 }
 

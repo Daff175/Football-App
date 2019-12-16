@@ -13,9 +13,9 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_club.view.*
 import org.jetbrains.anko.intentFor
 
-class TeamAdapter(private val item:List<TeamsItem>) : androidx.recyclerview.widget.RecyclerView.Adapter<TeamAdapter.Holder>() {
+class TeamAdapter(private val item:List<TeamsItem>) :RecyclerView.Adapter<TeamAdapter.Holder>() {
 
-    class Holder(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view){
+    class Holder(view: View): RecyclerView.ViewHolder(view){
 
         private val clubBadge:ImageView = view.club_badge_item
         private val clubName:TextView = view.club_name_item

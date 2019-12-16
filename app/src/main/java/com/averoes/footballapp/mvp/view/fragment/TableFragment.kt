@@ -14,6 +14,8 @@ import com.averoes.footballapp.mvp.presenter.TablePresenter
 import com.averoes.footballapp.mvp.view.TableView
 import com.averoes.footballapp.utils.TableAdapter
 import com.example.footballapp.mvp.model.soccer.CountrysItem
+import com.github.ybq.android.spinkit.sprite.Sprite
+import com.github.ybq.android.spinkit.style.FoldingCube
 import kotlinx.android.synthetic.main.fragment_table.*
 import org.jetbrains.anko.support.v4.ctx
 
@@ -34,10 +36,17 @@ class TableFragment : androidx.fragment.app.Fragment(), TableView {
     ): View? {
         // Inflate the layout for this fragment
         presenter = TablePresenter(this)
-        tableAdapter = TableAdapter(activity!!.baseContext, item)
+        tableAdapter = TableAdapter(item)
+
         return inflater.inflate(R.layout.fragment_table, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val foldingCube:Sprite = FoldingCube()
+        loading_table.setIndeterminateDrawable(foldingCube)
+    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val detail = activity?.intent?.getParcelableExtra<CountrysItem>("detail")
@@ -45,14 +54,22 @@ class TableFragment : androidx.fragment.app.Fragment(), TableView {
         activity?.actionBar?.title = detail?.leagueName
         presenter.getTableTeam(detail?.idLeague.toString())
         table_team.adapter = tableAdapter
-        table_team.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(ctx)
+        table_team.layoutManager = LinearLayoutManager(ctx)
+
 
     }
 
     override fun showLoading() {
+
+        if (loading_table != null){
+            loading_table.visibility = View.VISIBLE
+        }
     }
 
     override fun hideLoading() {
+        if (loading_table != null){
+            loading_table.visibility = View.GONE
+        }
     }
 
     override fun showMessage(pesan: String) {

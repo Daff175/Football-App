@@ -33,8 +33,7 @@ class LastFragment : androidx.fragment.app.Fragment(), MatchView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
-        val view: View = inflater.inflate(R.layout.fragment_last, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_last, container, false)
     }
 
 
@@ -42,9 +41,9 @@ class LastFragment : androidx.fragment.app.Fragment(), MatchView {
         super.onActivityCreated(savedInstanceState)
 
         presenter = MatchPresenter(this)
-        adapter = MatchAdapter(activity!!.applicationContext, data)
+        adapter = MatchAdapter(requireContext(), data)
         last_match.adapter = adapter
-        last_match.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(ctx)
+        last_match.layoutManager = LinearLayoutManager(ctx)
 
 
         val data = activity?.intent?.getParcelableExtra<CountrysItem>("detail")

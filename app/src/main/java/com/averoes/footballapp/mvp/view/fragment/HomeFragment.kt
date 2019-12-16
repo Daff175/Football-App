@@ -1,4 +1,4 @@
-package com.averoes.footballapp.mvp.view.activity
+package com.averoes.footballapp.mvp.view.fragment
 
 
 import android.os.Bundle
@@ -14,8 +14,10 @@ import com.averoes.footballapp.mvp.presenter.LeaguePresenter
 import com.averoes.footballapp.mvp.view.LeagueView
 import com.averoes.footballapp.utils.LeagueAdapter
 import com.example.footballapp.mvp.model.soccer.CountrysItem
-import kotlinx.android.synthetic.main.activity_home.league_list
+import com.github.ybq.android.spinkit.sprite.Sprite
+import com.github.ybq.android.spinkit.style.FoldingCube
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_table.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,13 +42,20 @@ class HomeFragment : androidx.fragment.app.Fragment(), LeagueView {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val foldingCube: Sprite = FoldingCube()
+        loading_league.setIndeterminateDrawable(foldingCube)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         presenter.getAllLeague()
         league_list.adapter = adapter
         league_list.layoutManager =
-            androidx.recyclerview.widget.GridLayoutManager(activity!!.baseContext, 2)
+            GridLayoutManager(requireContext(), 2)
 
     }
 

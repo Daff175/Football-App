@@ -9,25 +9,7 @@ import kotlinx.coroutines.withContext
 
 class MatchDetailPresenter(val view: MatchDetailView) {
 
-    fun getLeagueDetail(leagueId: String){
-        view.showLoading()
 
-        GlobalScope.launch(Dispatchers.IO) {
-            try {
-                val service = InitRetrofit().getInstance()
-                val request = service.getDetailLeague(leagueId)
-                if (request.isSuccessful){
-                    withContext(Dispatchers.Main){
-                        view.showDetailLeague(request.body()?.leagues)
-                    }
-                }
-            }catch (e:Exception){
-                e.printStackTrace()
-            }catch (e:Throwable){
-                e.printStackTrace()
-            }
-        }
-    }
 
     fun getTeamDetail(teamId:String, isHome: Boolean = true){
         view.showLoading()

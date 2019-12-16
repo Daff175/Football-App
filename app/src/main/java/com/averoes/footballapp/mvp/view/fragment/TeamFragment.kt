@@ -42,7 +42,7 @@ class TeamFragment : androidx.fragment.app.Fragment(), TeamView {
         presenter = TeamPresenter(this)
         adapter = TeamAdapter(data)
         team_list.adapter = adapter
-        team_list.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+        team_list.layoutManager = LinearLayoutManager(context)
         adapter.notifyDataSetChanged()
 
 
