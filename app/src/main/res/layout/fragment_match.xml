@@ -8,38 +8,37 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tablayout"
-            app:tabTextColor="@android:color/white"
-            app:tabSelectedTextColor="@android:color/holo_orange_dark"
-            android:background="@color/colorAccent"
-            android:layout_below="@id/spinner">
+            app:tabTextColor="@android:color/tab_indicator_text"
+            app:tabSelectedTextColor="@android:color/holo_blue_dark"
+            android:background="@android:color/transparent"
+            app:tabIndicator="@android:color/holo_orange_dark">
 
-        <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Last Match"/>
-
-        <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Next Match"/>
-
-
-    </android.support.design.widget.TabLayout>
+    </com.google.android.material.tabs.TabLayout>
 
     <FrameLayout
+            android:id="@+id/frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/tablayout">
 
     </FrameLayout>
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/view_pager"
             android:layout_below="@id/tablayout"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="32dp"
+            android:src="@drawable/ic_search_black_24dp"/>
 </RelativeLayout>

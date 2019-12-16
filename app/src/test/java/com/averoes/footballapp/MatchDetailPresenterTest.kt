@@ -1,7 +1,7 @@
 package com.averoes.footballapp
 
-import com.averoes.footballapp.mvp.presenter.TeamDetailPresenter
-import com.averoes.footballapp.mvp.view.TeamDetailView
+import com.averoes.footballapp.mvp.presenter.MatchDetailPresenter
+import com.averoes.footballapp.mvp.view.MatchDetailView
 import com.averoes.footballapp.networking.InitRetrofit
 import com.example.footballapp.mvp.model.Event.ResponseEvent
 import com.example.footballapp.mvp.model.club.ResponseClub
@@ -15,13 +15,13 @@ import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import retrofit2.Response
 
-class TeamDetailPresenterTest {
+class MatchDetailPresenterTest {
 
     @Mock
-    private lateinit var teamDetailPresenter: TeamDetailPresenter
+    private lateinit var matchDetailPresenter: MatchDetailPresenter
 
     @Mock
-    private lateinit var view: TeamDetailView
+    private lateinit var view: MatchDetailView
 
     @Mock
     private lateinit var service:InitRetrofit
@@ -33,7 +33,7 @@ class TeamDetailPresenterTest {
     @Before
     fun setUp(){
         MockitoAnnotations.initMocks(this)
-        teamDetailPresenter = TeamDetailPresenter(view)
+        matchDetailPresenter = MatchDetailPresenter(view)
     }
 
     @Test
@@ -47,7 +47,7 @@ class TeamDetailPresenterTest {
                 .thenReturn(responseCLub)
 
 
-            teamDetailPresenter.getTeamDetail("133604", true)
+            matchDetailPresenter.getTeamDetail("133604", true)
             Mockito.verify(view).showLoading()
             Mockito.verify(view).hideLoading()
             Mockito.verify(view).showTeamDetail(responseCLub.body()?.teams, true)
@@ -64,7 +64,7 @@ class TeamDetailPresenterTest {
             Mockito.`when`(service.getInstance().getMatchDetail(""))
                 .thenReturn(responseEvent)
 
-            teamDetailPresenter.getEventDetail("441613")
+            matchDetailPresenter.getEventDetail("441613")
             Mockito.verify(view).showLoading()
             Mockito.verify(view).hideLoading()
             Mockito.verify(view).showDetailEvent(responseEvent.body()?.events)

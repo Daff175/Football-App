@@ -10,4 +10,5 @@
     <item name="team_badge" type="id"/>
     <item name="tablayout" type="id"/>
     <item name="pager" type="id"/>
+    <item name="goto_match" type="id"/>
 </resources>

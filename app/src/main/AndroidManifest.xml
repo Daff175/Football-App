@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.averoes.footballapp">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -10,10 +11,24 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <activity android:name=".mvp.view.activity.FavoriteDetail">
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".mvp.view.activity.FavoriteTeamDetail">
+        </activity>
+        <activity android:name=".mvp.view.activity.SearchActivity">
         </activity>
         <activity android:name=".mvp.view.activity.TeamDetail">
+        </activity>
+        <activity
+                android:name=".mvp.view.activity.LeagueActivity"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity android:name=".mvp.view.activity.LeagueDetail">
+        </activity>
+        <activity android:name=".mvp.view.activity.HomeActivity"/>
+        <activity android:name=".mvp.view.activity.FavoriteMatchDetail">
+        </activity>
+        <activity android:name=".mvp.view.activity.MatchDetail">
         </activity>
         <activity
                 android:name=".mvp.view.activity.MainActivity"

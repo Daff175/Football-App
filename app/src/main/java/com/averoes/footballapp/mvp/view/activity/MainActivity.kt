@@ -1,11 +1,9 @@
 package com.averoes.footballapp.mvp.view.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.averoes.footballapp.R
-import com.averoes.footballapp.mvp.view.fragment.FavoriteFragment
-import com.averoes.footballapp.mvp.view.fragment.MatchFragment
-import com.averoes.footballapp.mvp.view.fragment.SearchFragment
+import com.averoes.footballapp.mvp.view.fragment.HomeFavoriteFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -26,9 +24,6 @@ class MainActivity : AppCompatActivity() {
                     loadFavoriteFragment(savedInstanceState)
                 }
 
-                R.id.search ->{
-                    loadSearchFragment(savedInstanceState)
-                }
             }
             true
         }
@@ -40,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager
                 .beginTransaction().replace(
                     R.id.main_container,
-                    MatchFragment())
+                    HomeFragment())
                 .commit()
         }
     }
@@ -50,20 +45,11 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager
                 .beginTransaction().replace(
                     R.id.main_container,
-                    FavoriteFragment(),
-                    FavoriteFragment::class.java.simpleName)
+                    HomeFavoriteFragment(),
+                    HomeFavoriteFragment::class.java.simpleName)
                 .commit()
         }
     }
 
-    fun loadSearchFragment(savedInstanceState: Bundle?){
-        if (savedInstanceState == null){
-            supportFragmentManager
-                .beginTransaction().replace(
-                    R.id.main_container,
-                    SearchFragment(),
-                    SearchFragment::class.java.simpleName)
-                .commit()
-        }
-    }
+
 }

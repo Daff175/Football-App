@@ -1,19 +1,20 @@
-package com.averoes.footballapp
+package com.averoes.footballapp.utils
 
 import android.content.Context
 import android.graphics.Typeface
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.averoes.footballapp.R
 import com.averoes.footballapp.mvp.model.event.EventsItem
-import com.averoes.footballapp.mvp.view.activity.TeamDetail
+import com.averoes.footballapp.mvp.view.activity.MatchDetail
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
 
-class TeamAdapter(private val context: Context, var teamItems: List<EventsItem> = listOf()) : RecyclerView.Adapter<TeamAdapter.Holder>() {
+class MatchAdapter(private val context: Context, var teamItems: List<EventsItem> = listOf()) : androidx.recyclerview.widget.RecyclerView.Adapter<MatchAdapter.Holder>() {
 
 
     class MatchItemUI : AnkoComponent<ViewGroup> {
@@ -102,7 +103,11 @@ class TeamAdapter(private val context: Context, var teamItems: List<EventsItem> 
 
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): Holder =
-        Holder(MatchItemUI().createView(AnkoContext.create(context, parent)))
+        Holder(
+            MatchItemUI().createView(
+                AnkoContext.create(context, parent)
+            )
+        )
 
     override fun getItemCount(): Int = teamItems.size
 
@@ -111,7 +116,7 @@ class TeamAdapter(private val context: Context, var teamItems: List<EventsItem> 
     }
 
 
-    class Holder(view: View) : RecyclerView.ViewHolder(view) {
+    class Holder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
         private val teamName = itemView.find<TextView>(R.id.home_team)
         private val teamAway = itemView.find<TextView>(R.id.away_team)
@@ -131,7 +136,7 @@ class TeamAdapter(private val context: Context, var teamItems: List<EventsItem> 
 
 
             itemView.setOnClickListener {
-                itemView.context.startActivity(itemView.context.intentFor<TeamDetail>("detail" to item).newTask())
+                itemView.context.startActivity(itemView.context.intentFor<MatchDetail>("detail" to item).newTask())
             }
         }
     }

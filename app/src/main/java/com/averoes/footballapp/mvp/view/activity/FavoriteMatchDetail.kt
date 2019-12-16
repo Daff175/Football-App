@@ -1,19 +1,19 @@
 package com.averoes.footballapp.mvp.view.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import com.averoes.footballapp.R
 import com.averoes.footballapp.mvp.model.Favorite
 import kotlinx.android.synthetic.main.activity_favorite_detail.*
 
-class FavoriteDetail : AppCompatActivity() {
+class FavoriteMatchDetail : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favorite_detail)
 
-        supportActionBar?.title = "Team Detail"
+        supportActionBar?.title = "Match Detail"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 

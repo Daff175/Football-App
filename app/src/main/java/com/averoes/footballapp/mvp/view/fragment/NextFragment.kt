@@ -2,20 +2,19 @@ package com.averoes.footballapp.mvp.view.fragment
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import com.averoes.footballapp.R
-import com.averoes.footballapp.TeamAdapter
 import com.averoes.footballapp.mvp.model.event.EventsItem
 import com.averoes.footballapp.mvp.presenter.MatchPresenter
 import com.averoes.footballapp.mvp.view.MatchView
+import com.averoes.footballapp.utils.MatchAdapter
+import com.example.footballapp.mvp.model.soccer.CountrysItem
 import kotlinx.android.synthetic.main.fragment_next.*
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.toast
@@ -27,11 +26,11 @@ import org.jetbrains.anko.support.v4.toast
  * A simple [Fragment] subclass.
  *
  */
-class NextFragment : Fragment(), MatchView {
+class NextFragment : androidx.fragment.app.Fragment(), MatchView {
 
     private var data: MutableList<EventsItem> = mutableListOf()
     private lateinit var presenter: MatchPresenter
-    private lateinit var adapter: TeamAdapter
+    private lateinit var adapter: MatchAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,34 +44,21 @@ class NextFragment : Fragment(), MatchView {
         super.onActivityCreated(savedInstanceState)
 
         presenter = MatchPresenter(this)
-        adapter = TeamAdapter(activity!!.applicationContext,data)
+        adapter = MatchAdapter(activity!!.applicationContext, data)
         next_match.adapter = adapter
-        next_match.layoutManager = LinearLayoutManager(ctx)
+        next_match.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(ctx)
 
 
-        val spinerItem = resources.getStringArray(R.array.league)
-        val idLeague = resources.getStringArray(R.array.idLeague)
-        val spinnerLeague = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinerItem)
-        spinner_next.adapter = spinnerLeague
+        val data = activity?.intent?.getParcelableExtra<CountrysItem>("detail")
+
+        presenter.getNextMatch(data?.idLeague!!.toInt())
 
 
-        spinner_next.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
-                presenter.getNextMatch(idLeague[position].toInt())
-
-            }
-
-        }
     }
 
     override fun showLoading() {
 
-        if (loading_next != null){
+        if (loading_next != null) {
             loading_next.visibility = VISIBLE
 
         }
@@ -80,7 +66,7 @@ class NextFragment : Fragment(), MatchView {
 
     override fun hideLoading() {
 
-        if (loading_next != null){
+        if (loading_next != null) {
             loading_next.visibility = GONE
         }
     }
@@ -95,10 +81,10 @@ class NextFragment : Fragment(), MatchView {
 
     override fun showMatchList(match: List<EventsItem>?) {
 
-        if (match != null){
+        if (match != null) {
             data.clear()
             data.addAll(match)
-        }else{
+        } else {
             toast("Nothing data")
         }
 

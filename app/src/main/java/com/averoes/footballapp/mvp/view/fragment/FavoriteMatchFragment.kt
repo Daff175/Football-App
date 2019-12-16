@@ -3,17 +3,17 @@ package com.averoes.footballapp.mvp.view.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.averoes.footballapp.FavoriteTeamAdapter
 import com.averoes.footballapp.R
 import com.averoes.footballapp.mvp.model.Favorite
 import com.averoes.footballapp.mvp.model.db.database
+import com.averoes.footballapp.utils.FavoriteMatchAdapter
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
@@ -26,13 +26,13 @@ import org.jetbrains.anko.support.v4.swipeRefreshLayout
  * A simple [Fragment] subclass.
  *
  */
-class FavoriteFragment : Fragment(), AnkoComponent<Context> {
+class FavoriteMatchFragment : androidx.fragment.app.Fragment(), AnkoComponent<Context> {
 
 
     private var favorites: MutableList<Favorite> = mutableListOf()
-    private lateinit var adapter: FavoriteTeamAdapter
-    private lateinit var listTeam: RecyclerView
-    private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var adapter: FavoriteMatchAdapter
+    private lateinit var listTeam: androidx.recyclerview.widget.RecyclerView
+    private lateinit var swipeRefresh: androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -56,7 +56,7 @@ class FavoriteFragment : Fragment(), AnkoComponent<Context> {
                 )
                 listTeam = recyclerView {
                     lparams(width = matchParent, height = wrapContent)
-                    layoutManager = LinearLayoutManager(ctx)
+                    layoutManager = androidx.recyclerview.widget.LinearLayoutManager(ctx)
                 }
             }
         }
@@ -65,7 +65,7 @@ class FavoriteFragment : Fragment(), AnkoComponent<Context> {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        adapter = FavoriteTeamAdapter(favorites)
+        adapter = FavoriteMatchAdapter(favorites)
         listTeam.adapter = adapter
         showFavorite()
         swipeRefresh.onRefresh {

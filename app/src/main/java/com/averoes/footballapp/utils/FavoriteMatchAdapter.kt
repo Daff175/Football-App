@@ -1,25 +1,31 @@
-package com.averoes.footballapp
+package com.averoes.footballapp.utils
 
 import android.database.sqlite.SQLiteConstraintException
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.averoes.footballapp.R
 import com.averoes.footballapp.mvp.model.Favorite
 import com.averoes.footballapp.mvp.model.db.database
-import com.averoes.footballapp.mvp.view.activity.FavoriteDetail
+import com.averoes.footballapp.mvp.view.activity.FavoriteMatchDetail
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.find
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
-class FavoriteTeamAdapter(private val favorite: List<Favorite>) : RecyclerView.Adapter<FavoriteTeamAdapter.Holder>() {
+class FavoriteMatchAdapter(private val favorite: List<Favorite>) : androidx.recyclerview.widget.RecyclerView.Adapter<FavoriteMatchAdapter.Holder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): Holder =
-        Holder(LayoutInflater.from(parent.context).inflate(R.layout.favorite_item, parent, false))
+        Holder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.favorite_item,
+                parent,
+                false
+            )
+        )
 
     override fun getItemCount(): Int = favorite.size
 
@@ -28,7 +34,7 @@ class FavoriteTeamAdapter(private val favorite: List<Favorite>) : RecyclerView.A
     }
 
 
-    class Holder(view: View) : RecyclerView.ViewHolder(view) {
+    class Holder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         private val teamName = itemView.find<TextView>(R.id.home_team)
         private val teamAway = itemView.find<TextView>(R.id.away_team)
         private val homeScore = itemView.find<TextView>(R.id.home_team_score)
@@ -59,7 +65,7 @@ class FavoriteTeamAdapter(private val favorite: List<Favorite>) : RecyclerView.A
             }
 
             itemView.setOnClickListener {
-                itemView.context.startActivity(itemView.context.intentFor<FavoriteDetail>(
+                itemView.context.startActivity(itemView.context.intentFor<FavoriteMatchDetail>(
                     "favorite" to favorite
                 ))
             }

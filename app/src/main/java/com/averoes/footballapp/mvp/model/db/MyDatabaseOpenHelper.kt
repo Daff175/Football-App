@@ -3,9 +3,10 @@ package com.averoes.footballapp.mvp.model.db
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.averoes.footballapp.mvp.model.Favorite
+import com.averoes.footballapp.mvp.model.FavoriteTeam
 import org.jetbrains.anko.db.*
 
-class MyDatabaseOpenHelper(context: Context) : ManagedSQLiteOpenHelper(context, "favorite.db", null, 1) {
+class MyDatabaseOpenHelper(context: Context) : ManagedSQLiteOpenHelper(context, "favorite.db", null, 2) {
 
     companion object {
         private var instace: MyDatabaseOpenHelper? = null
@@ -40,11 +41,22 @@ class MyDatabaseOpenHelper(context: Context) : ManagedSQLiteOpenHelper(context, 
 
 
         )
+
+        db?.createTable(
+            FavoriteTeam.TABLE_TEAM, true,
+            FavoriteTeam.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
+            FavoriteTeam.TEAM_ID to TEXT + UNIQUE,
+            FavoriteTeam.TEAM_NAME to TEXT,
+            FavoriteTeam.TEAM_DESC to TEXT,
+            FavoriteTeam.TEAM_BANNER to TEXT,
+            FavoriteTeam.TEAM_POSTER to TEXT
+        )
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
 
         db?.dropTable(Favorite.TABLE_FAVORITE, true)
+        db?.dropTable(FavoriteTeam.TABLE_TEAM, true)
     }
 }
 

@@ -1,13 +1,33 @@
 package com.averoes.footballapp.mvp.presenter
 
-import com.averoes.footballapp.mvp.view.TeamDetailView
+import com.averoes.footballapp.mvp.view.MatchDetailView
 import com.averoes.footballapp.networking.InitRetrofit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class TeamDetailPresenter(val view: TeamDetailView) {
+class MatchDetailPresenter(val view: MatchDetailView) {
+
+    fun getLeagueDetail(leagueId: String){
+        view.showLoading()
+
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val service = InitRetrofit().getInstance()
+                val request = service.getDetailLeague(leagueId)
+                if (request.isSuccessful){
+                    withContext(Dispatchers.Main){
+                        view.showDetailLeague(request.body()?.leagues)
+                    }
+                }
+            }catch (e:Exception){
+                e.printStackTrace()
+            }catch (e:Throwable){
+                e.printStackTrace()
+            }
+        }
+    }
 
     fun getTeamDetail(teamId:String, isHome: Boolean = true){
         view.showLoading()

@@ -63,7 +63,8 @@ class MatchPresenter(private val view: MatchView) {
                 if (response.isSuccessful){
                     withContext(Dispatchers.Main){
                         view.hideLoading()
-                        view.showMatchList(response.body()?.event)
+                        val leagueList= response.body()?.event
+                        view.showMatchList(leagueList?.filter { it.strSport == "Soccer" })
                     }
                 }
             }catch (e:Exception){

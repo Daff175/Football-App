@@ -4,11 +4,11 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".mvp.view.activity.FavoriteDetail">
+                tools:context=".mvp.view.activity.FavoriteMatchDetail">
 
     <!-- Card Team -->
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
             android:id="@+id/card_team"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,12 +60,12 @@
         </LinearLayout>
 
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
     <!-- Card Team -->
 
     <!-- Card Score -->
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
             android:id="@+id/card_score"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -112,12 +112,12 @@
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
     <!-- Card Score-->
 
     <!-- Card Goal -->
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
             android:id="@+id/card_goal"
             android:layout_width="match_parent"
             android:layout_height="150dp"
@@ -165,11 +165,11 @@
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
     <!--  Card Goal  -->
 
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_below="@id/card_goal"
@@ -216,6 +216,6 @@
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

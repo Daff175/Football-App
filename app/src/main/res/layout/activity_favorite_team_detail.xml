@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ImageView
+                android:id="@+id/club_banner"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/backgrounds/scenic"/>
+
+        <ImageView
+                android:id="@+id/club_badge_detail"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/club_banner"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-48dp"
+                android:layout_marginBottom="32dp"
+                tools:src="@tools:sample/avatars"/>
+
+        <TextView
+                android:id="@+id/club_name_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/club_badge_detail"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                tools:text="Team Name"/>
+
+        <TextView
+                android:id="@+id/club_desc_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/club_name_detail"
+                android:layout_margin="8dp"
+                android:gravity="start"
+                tools:text="Team Description"/>
+
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>
