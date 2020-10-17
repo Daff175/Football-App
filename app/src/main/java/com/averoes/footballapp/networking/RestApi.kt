@@ -41,5 +41,8 @@ interface RestApi {
 
     @GET("searchteams.php")
     suspend fun searchTeams(@Query("t")name:String):Response<ResponseClub>
+    
+     @GET("searchteams.php")
+    suspend fun mencariTeams(@Query("t")name:String):Response<ResponseClub>
 
 }
