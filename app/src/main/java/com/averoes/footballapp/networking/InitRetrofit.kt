@@ -16,7 +16,7 @@ class InitRetrofit  {
     val client = OkHttpClient.Builder()
         .addInterceptor(interceptor)
         .retryOnConnectionFailure(true)
-        .connectTimeout(15, TimeUnit.HOURS)
+        .connectTimeout(30, TimeUnit.SECONDS)
         .build()
 
     val gson = GsonBuilder().setLenient().create()
